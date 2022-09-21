@@ -1,58 +1,29 @@
-//WAP to add two times in hour and minutes illustrating passing object as function argument.
+#include<stdio.h>
+#include<conio.h>
 
-#include<iostream>
-using namespace std;
-
-class Time{
-	int hour;
-	int min;
-	
-	public:
-		void getData()
-		{
-			cout << "Enter Time" << endl;
-			cout << "Hour : ";
-			cin>> hour;
-			cout << "Minute : ";
-			cin>> min; 
-		}
-		Time calc(Time obj1[2])
-		{
-			int count;
-			Time obj3;
-			
-			obj3.hour = obj1[0].hour + obj1[1].hour;
-			obj3.min = obj1[0].min + obj1[1].min;
-			
-			while(obj3.min > 60)
-			{
-				obj3.min -=60;
-				count++;
-			}
-			obj3.hour  += count;
-			return obj3;
-		}
-		void putData()
-		{
-			cout <<"Added Hour is : "<< hour << endl;
-			cout <<"Added Minute is : " << min << endl;
-		}
-};
-
-int main()
-{
-	Time obj[2];
-	Time obj1;
-	int i=0;
-	
-	for(i=0;i<2;i++)
-	{
-		cout <<"Time " << i+1 <<" : ";
-		obj[i].getData();
+int main(){
+	float x[100],y[100],xp,yp=0,p;
+	int i,j,n;
+	printf("Enter number of data: ");
+	scanf("%d",&n);
+	printf("Enter data:\n");
+	for(i=1;i<=n;i++){
+		printf("x[%d] = ",i);
+		scanf("%f",&x[i]);
+		printf("y[%d]",i);
+		scanf("%f",&y[i]);
 	}
-	obj1 = obj[0].calc(obj);
-	obj1.putData();
+	printf("\nEnter Interpolation point: ");
+	scanf("%f",&xp);
+	for(i=1;i<=n;i++){
+		p=1;
+		for(j=1;j<=n;j++){
+			if(i!=j){
+				p=p*(xp-x[j])/(x[i]-x[j]);
+			}
+		}
+		yp = yp+p*y[i];
+	}
+	printf("Tnteroplation value at %.3f is %.3f",xp,yp);
 	return 0;
-	
-	
 }
